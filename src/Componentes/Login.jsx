@@ -16,17 +16,44 @@ export const Login = () => {
         setformstate({...formstate,
         [name]: value})
     }
-
-    /*
-    const handleInputChange = (e) => {
-        setBusqueda(e.target.value)
-    }*/ 
     
     const handleSubmit = (e) => {
         e.preventDefault()
-    }
-
+        
+        const nombreUs = document.querySelector("input[name='nombreUsuario']")
+        const contra = document.querySelector("input[name='password']")
     
+        const payload = {nombreUs: nombreUs.value, contraseña: contra.value}
+
+        console.log(JSON.stringify(payload))
+        
+        const settings = {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        fetch("http://localhost:8080/auth/login", settings)
+        .then(response => {
+            if (!response.ok) {
+                console.log("MAL USUARIO")
+            }
+
+            const responseJSON = response.text();
+            return responseJSON;
+        }).then(data => {
+            console.log("Promesa cumplida:", data);
+            
+            if (data != null && data != undefined) {
+                localStorage.setItem('jwt', data);
+            
+                // window.location.href = window.location.origin    // -> ESTO NOS LLEVA AL HOME 
+            }
+        }).catch(err => console.error(`Error: ${err}`))
+        
+    }
     
 
     return (
@@ -34,7 +61,7 @@ export const Login = () => {
 
         <h1 className="titulo-login">Login</h1>
         
-        <form handleSubmit= {handleSubmit}>
+        <form onSubmit={handleSubmit}>
 
             <div className="casilla">
                 
@@ -61,7 +88,7 @@ export const Login = () => {
             </div>
 
             <div className="botonSubmit">
-                <button type="submit" className="botonSubmit" onClick={handleSubmit}>Submit</button>            
+                <button type="submit" className="botonSubmit">Submit</button>            
             </div>
 
             
