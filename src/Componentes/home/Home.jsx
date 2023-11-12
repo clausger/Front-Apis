@@ -1,16 +1,27 @@
 import { jwtDecode } from "jwt-decode";
+import { useEffect } from "react";
+import { HomeAdmin } from "./HomeAdmin";
+import { HomeCliente } from "./HomeCliente";
+import { Login } from "../login/Login";
+
+const rol = "admin" // ESTO SE SACARIA DEL TOKEN DEL SESSION LOG, SI ES VACIO TE TIRA AL LOGIN
 
 export const Home = () => {
     const componentByAuth = () =>{
-    const token = ""+sessionStorage.getItem("token")
+    // const token = ""+sessionStorage.getItem("token")
     
-    console.log(JSON.parse(decodedPayload))
-    
-
-     //const decodedToken = jwtDecode(token);
-     //const rol = decodedToken.rol; 
-     //console.log(rol)
-   } 
+    // console.log(JSON.parse(decodedPayload))
+   
+      if (rol === "admin"){
+        return (<HomeAdmin></HomeAdmin>)
+      } else if (rol === "inquilino" || rol === "dueno"){
+        return (<HomeCliente></HomeCliente>)
+      }
+      else{
+        return (<Login></Login>)
+      }
+      
+  }
 
   return (
     <div>
@@ -21,9 +32,9 @@ export const Home = () => {
         <a href="#">Opción 2</a>
         <a href="#">Opción 3</a>
       </div>
-    
-      <button onClick={componentByAuth}></button>
-    
+      <div>
+        {componentByAuth()}
+      </div>    
     </div>
   )
 }
