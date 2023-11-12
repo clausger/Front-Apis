@@ -1,13 +1,14 @@
-import { Home } from "./Componentes/Home"
-import { Login } from "./Componentes/Login"
+import { Home } from "./Componentes/home/Home"
+import { Login } from "./Componentes/login/Login"
+import { Route, Routes } from "react-router-dom"
 
-export const ReclamosApp = () => {
+export const ReclamosApp = () => { 
   return (
     <div>
-      <Login></Login>
-      <Home></Home>
-    
-    
+      <Routes>
+        <Route path="/" element={<Login> </Login>}> </Route>
+        <Route path="/Home" element={<Home> </Home>}> </Route>
+      </Routes>
     </div>
   )
 }
