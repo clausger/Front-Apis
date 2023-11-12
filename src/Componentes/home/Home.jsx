@@ -3,10 +3,19 @@ import { useEffect } from "react";
 import { HomeAdmin } from "./HomeAdmin";
 import { HomeCliente } from "./HomeCliente";
 import { Login } from "../login/Login";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const rol = "admin" // ESTO SE SACARIA DEL TOKEN DEL SESSION LOG, SI ES VACIO TE TIRA AL LOGIN
 
 export const Home = () => {
+    const navigate = useNavigate();
+    const location = useLocation(); 
+
+    useEffect(() => {
+      if (rol !== "admin" && rol !== "inquilino" && rol !== "dueno")
+        navigate("/Login", { state: location.state });
+    },[])
+
     const componentByAuth = () =>{
     // const token = ""+sessionStorage.getItem("token")
     
@@ -16,11 +25,9 @@ export const Home = () => {
         return (<HomeAdmin></HomeAdmin>)
       } else if (rol === "inquilino" || rol === "dueno"){
         return (<HomeCliente></HomeCliente>)
+      }else{
+        return (<h2>Credenciales Invalidas</h2>)
       }
-      else{
-        return (<Login></Login>)
-      }
-      
   }
 
   return (

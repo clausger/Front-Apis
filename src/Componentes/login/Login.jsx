@@ -1,6 +1,11 @@
 import { useState } from 'react'
+import { Home } from '../home/Home'
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Login = () => {
+    const navigate = useNavigate();
+    const location = useLocation(); 
+
   
     const [formstate, setformstate] = useState({
         nombreUsuario: "", 
@@ -53,6 +58,7 @@ export const Login = () => {
             }
         }).catch(err => console.error(`Error: ${err}`))
         
+        navigate("/Home", { state: location.state });
     }
     
 
