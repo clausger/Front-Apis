@@ -1,17 +1,44 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from 'react-router-dom';
+import  axios  from 'axios'
 
 export const VerUsuarios = () => {
 
     // ACA VA UN TABLA PARA USUARIOS
     // TODOS TIENE TELELFONO, DIRECCION, EMAIL, NOMBRE, NOMBRE_US
 
-    const [usuarios, setUsuario] = useState([{"nombre":"cambio","nombreUs":"admin","telefono":1,"email":"email@prueba","direcion":"pruebaDir"}]);
+    const [usuarios, setUsuario] = useState([]);
+    var token;
 
-    // useEffect(() => {
-    //     obtenerUsuarios();
-    // },[]);
+    useEffect(() => {
+        token = sessionStorage.getItem("jwt")
+        if(token === null){
+            console.log('VOLVER A EL LOGIN')
+        }
+        obtenerUsuarios();
+    },[]);
+
+    const obtenerUsuarios = () => {
+        const settings = {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        }
+        fetch('http://localhost:8080/api/admins', settings)
+        .then((response) => {
+            if (!response.ok){
+                console.log('ALGO PASO MAL JAJA')
+            }
+            return response.json()
+        }).then((data) => {
+            setUsuario(data)
+        }).catch((error) => {
+            console.log("ERROR")
+        })
+    }
 
     return (
         <div>
@@ -35,6 +62,8 @@ export const VerUsuarios = () => {
                             <th>Email</th>
                             <th>Direcion</th>
                             <th>Telefono</th>
+                            <th>Acciones</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,6 +74,8 @@ export const VerUsuarios = () => {
                                 <td>{usuario.email}</td>
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
+                                <td>{<button>Actualizar</button>}</td>
+                                <td>{<button>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>
