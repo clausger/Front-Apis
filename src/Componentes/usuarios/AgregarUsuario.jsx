@@ -10,6 +10,7 @@ export const AgregarUsuario = () => {
 
     const [nombre, setNombre] = useState('')
     const [nombreUs, setNombreUs] = useState('')
+    const [contraseña, setContraseña] = useState('')
     const [email, setEmail] = useState('')
     const [direcion, setDirecion] = useState('')
     const [telefono, setTelefono] = useState(0)
@@ -20,15 +21,36 @@ export const AgregarUsuario = () => {
     const handleSumbit = async (e) => {
         e.preventDefault();
 
-        const body = {nombre, nombreUs, email, direcion, telefono}
+        const body = {nombre, nombreUs, contraseña, email, direcion, telefono}
 
         console.log(body)
 
         setNombre('')
         setNombreUs('')
+        setContraseña('')
         setEmail('')
         setDirecion('')
         setTelefono(0)
+
+        const settings = {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+            }
+        }
+
+        await fetch('http://localhost:8080/api/admin', settings)
+        .then((response) => {
+            if (!response.ok){
+                alert("ERROR", response.status)
+            }
+            else{
+                console.log("SE ENVIO LA INFO")
+            }
+            return response.json()
+        }).catch(err => console.error(`Error: ${err}`))
 
         navigate("/Usuarios", { state: location.state });
     }
@@ -45,6 +67,7 @@ export const AgregarUsuario = () => {
                 <form onSubmit={handleSumbit}>
                     <input type='text' placeholder='Ingresar nombre' value={nombre} onChange={(e) => setNombre(e.target.value)}/>
                     <input type='text' placeholder='Ingresar usuario' value={nombreUs} onChange={(e) => setNombreUs(e.target.value)}/>
+                    <input type='text' placeholder='Ingresar contraseña' value={contraseña} onChange={(e) => setContraseña(e.target.value)}/>
                     <input type='text' placeholder='Ingresar email' value={email} onChange={(e) => setEmail(e.target.value)}/>
                     <input type='text' placeholder='Ingresar direcion' value={direcion} onChange={(e) => setDirecion(e.target.value)}/>
                     <input type='text' placeholder='Ingresar telefono' value={telefono === 0 ? "" : telefono} onChange={(e) => setTelefono(e.target.value)}/>

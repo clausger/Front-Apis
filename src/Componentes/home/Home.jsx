@@ -1,33 +1,39 @@
 import { jwtDecode } from "jwt-decode";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { HomeAdmin } from "./HomeAdmin";
 import { HomeCliente } from "./HomeCliente";
 import { Login } from "../login/Login";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const rol = "admin" // ESTO SE SACARIA DEL TOKEN DEL SESSION LOG, SI ES VACIO TE TIRA AL LOGIN
-
 export const Home = () => {
     const navigate = useNavigate();
     const location = useLocation(); 
 
-    useEffect(() => {
-      if (rol !== "admin" && rol !== "inquilino" && rol !== "dueno")
+    const token = sessionStorage.getItem("jwt");
+    console.log(token)
+    var rol
+
+    if(token !== "Credenciales invalidas" && token !== undefined){
+      const [, payload] = token.split('.');
+      const decodedPayload = JSON.parse(atob(payload));
+      rol = decodedPayload.rol
+    }else{
+      rol = ""
+    }
+
+    useEffect(()=>{
+      if (rol != "admin" && rol !== "inquilino" && rol !== "dueno")
         navigate("/Login", { state: location.state });
     },[])
 
     const componentByAuth = () =>{
-    // const token = ""+sessionStorage.getItem("token")
-    
-    // console.log(JSON.parse(decodedPayload))
-   
       if (rol === "admin"){
         return (<HomeAdmin></HomeAdmin>)
       } else if (rol === "inquilino" || rol === "dueno"){
         return (<HomeCliente></HomeCliente>)
       }else{
         return (<h2>Credenciales Invalidas</h2>)
-      }
+    }
   }
 
   return (

@@ -8,7 +8,7 @@ export const VerUsuarios = () => {
     // ACA VA UN TABLA PARA USUARIOS
     // TODOS TIENE TELELFONO, DIRECCION, EMAIL, NOMBRE, NOMBRE_US
 
-    const [usuarios, setUsuario] = useState([]);
+    const [administradores, setAdministradores] = useState([]);
     var token;
 
     useEffect(() => {
@@ -19,7 +19,7 @@ export const VerUsuarios = () => {
         obtenerUsuarios();
     },[]);
 
-    const obtenerUsuarios = () => {
+    const obtenerUsuarios = async () => {
         const settings = {
             method: "GET",
             headers: {
@@ -27,14 +27,14 @@ export const VerUsuarios = () => {
                 Authorization: `Bearer ${token}`,
             }
         }
-        fetch('http://localhost:8080/api/admins', settings)
+        await fetch('http://localhost:8080/api/admins', settings)
         .then((response) => {
             if (!response.ok){
-                console.log('ALGO PASO MAL JAJA')
+                console.log('ALGO PASO MAL JAJA', response.status)
             }
             return response.json()
         }).then((data) => {
-            setUsuario(data)
+            setAdministradores(data)
         }).catch((error) => {
             console.log("ERROR")
         })
@@ -46,14 +46,15 @@ export const VerUsuarios = () => {
                 <Link to="/Home">
                     <button>Back</button>
                 </Link>
-                
-                <Link to="/Usuarios/Agregar">
-                    <button>AgregarUsuario</button>
-                </Link>
-
             </div>
             <div className="bodyUsuarios">
                 <h2>Ver Usuarios</h2>
+                <h3>Administradores: </h3>
+                <div>
+                    <Link to="/Usuarios/Agregar">
+                        <button>AgregarUsuario</button>
+                    </Link>
+                </div>
                 <table className="tablaUsuarios">
                     <thead>
                         <tr>
@@ -67,7 +68,7 @@ export const VerUsuarios = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {usuarios.map(usuario => (
+                        {administradores.map(usuario => (
                             <tr key={usuario.id}>
                                 <td>{usuario.nombre}</td>
                                 <td>{usuario.nombreUs}</td>
@@ -80,6 +81,8 @@ export const VerUsuarios = () => {
                         ))}
                     </tbody>
                 </table>
+                <h3>Duenos</h3>
+                <h3>Inquilinos</h3>
             </div>
         </div>
         

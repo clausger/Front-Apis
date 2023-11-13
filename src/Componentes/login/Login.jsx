@@ -22,7 +22,7 @@ export const Login = () => {
         [name]: value})
     }
     
-    const handleSubmit = (e) => {
+    const handleSubmit  = async (e) => {
         e.preventDefault()
         
         const nombreUs = document.querySelector("input[name='nombreUsuario']")
@@ -40,7 +40,7 @@ export const Login = () => {
             }
         }
 
-        fetch("http://localhost:8080/auth/login", settings)
+        await fetch("http://localhost:8080/auth/login", settings)
         .then(response => {
             if (!response.ok) {
                 console.log("MAL USUARIO")
