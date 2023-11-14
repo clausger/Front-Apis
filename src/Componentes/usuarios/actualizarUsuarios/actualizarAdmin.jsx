@@ -47,6 +47,8 @@ export const ActualizarAdmin = () => {
             return response.json()
         }).catch(err => console.error(`Error: ${err}`))
 
+        sessionStorage.removeItem("update")
+
         navigate("/usuario", { state: location.state });
     }
     
