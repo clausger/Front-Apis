@@ -7,6 +7,8 @@ import AgregarDueno from "./Componentes/usuarios/agregarUsuarios/AgregarDueno"
 import AgregarInquilino from "./Componentes/usuarios/agregarUsuarios/AgregarInquilino"
 import VerEdificio from "./Componentes/edificio/VerEdificio"
 import { ActualizarAdmin } from "./Componentes/usuarios/actualizarUsuarios/actualizarAdmin"
+import { ActualizarDueno } from "./Componentes/usuarios/actualizarUsuarios/actualizarDueno"
+import { ActualizarInquilino } from "./Componentes/usuarios/actualizarUsuarios/actualizarInquilino"
 
 export const ReclamosApp = () => { 
   return (
@@ -15,11 +17,15 @@ export const ReclamosApp = () => {
       <Route path="/" element={<Login> </Login>}> </Route>
         <Route path="/login" element={<Login> </Login>}> </Route>
         <Route path="/home" element={<Home> </Home>}> </Route>
+
         <Route path="/usuario" element={<VerUsuarios></VerUsuarios>}></Route>
         <Route path="/usuario/admin" element={<AgregarAdmin></AgregarAdmin>}></Route>
-        <Route path="/usuario/update_admin" element={<ActualizarAdmin></ActualizarAdmin>}></Route>
         <Route path="/usuario/dueno" element={<AgregarDueno></AgregarDueno>}></Route>
         <Route path="/usuario/inquilino" element={<AgregarInquilino></AgregarInquilino>}></Route>
+        <Route path="/usuario/update_admin" element={<ActualizarAdmin></ActualizarAdmin>}></Route>
+        <Route path="/usuario/update_dueno" element={<ActualizarDueno></ActualizarDueno>}> </Route>
+        <Route path="/usuario/update_inqui" element={<ActualizarInquilino></ActualizarInquilino>}></Route>
+
         <Route path="/edificio" element={<VerEdificio></VerEdificio>}></Route>
       </Routes>
     </div>

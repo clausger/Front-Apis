@@ -53,10 +53,9 @@ export const Login = () => {
             
             if (data != null && data != undefined) {
                 sessionStorage.setItem('jwt', data);
+                navigate("/home", { state: location.state });
             }
         }).catch(err => console.error(`Error: ${err}`))
-        
-        navigate("/home", { state: location.state });
     }
     
 

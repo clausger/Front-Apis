@@ -33,12 +33,18 @@ export const Home = () => {
         return (<HomeCliente></HomeCliente>)
       }else{
         return (<h2>Credenciales Invalidas</h2>)
+      }
     }
+  const handleLogOut = () =>{
+    sessionStorage.setItem("jwt", null)
+    navigate("/login", {state: location.state})
   }
+
 
   return (
     <div>
       <div>
+        <button onClick={handleLogOut}>Log out</button>
         {componentByAuth()}
       </div>    
     </div>

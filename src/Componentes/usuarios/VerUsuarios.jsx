@@ -160,6 +160,15 @@ export const VerUsuarios = () => {
         nav('/usuario/update_admin')
     }
 
+    const handleActualizarDueno = (dueno) =>{
+        sessionStorage.setItem("update", JSON.stringify(dueno))
+        nav('/usuario/update_dueno')
+    } 
+    
+    const handleActualizarInquilino = (inquilino) =>{
+        sessionStorage.setItem("update", JSON.stringify(inquilino))
+        nav('/usuario/update_inqui')
+    }
 
     return (
         <div>
@@ -229,7 +238,7 @@ export const VerUsuarios = () => {
                                 <td>{usuario.email}</td>
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
-                                <td>{<button>Actualizar</button>}</td>
+                                <td>{<button onClick={() => handleActualizarDueno(usuario)}>Actualizar</button>}</td>
                                 <td>{<button onClick={() => handleEliminarDueno(usuario.idDueno)}>Eliminar</button>}</td>
                             </tr>
                         ))}
@@ -264,7 +273,7 @@ export const VerUsuarios = () => {
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
                                 <td>{usuario.idUnidad}</td>
-                                <td>{<button>Actualizar</button>}</td>
+                                <td>{<button onClick={() => handleActualizarInquilino(usuario)}>Actualizar</button>}</td>
                                 <td>{<button onClick={() => handleEliminarInqui(usuario.idInquilino)}>Eliminar</button>}</td>
                             </tr>
                         ))}
