@@ -86,60 +86,74 @@ export const VerUsuarios = () => {
         })
     }
 
-    const obtenerId = async (nombreUs) => {
-        var id = 0;
-        
+    const handleEliminarAdmin = async (id) => {
         const settings = {
-            method: "GET",
+            method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
             }
         }
 
-        await fetch(`http://localhost:8080/api/nombreUs/admin`, settings)
+        await fetch(`http://localhost:8080/api/admin/${id}`, settings)
         .then((response) => {
             if(!response.ok){
                 console.log('ALGO PASO', response.status)
             }
-            const a = parseInt(response.text())
-            return a
-        }) .then((data) => {
-            console.log(data)
-            id = data
-        }).catch((error) => {
+            console.log(response.status)
+        })
+        .catch((error) => {
             console.log("ERROR")
-        }) 
-        return id;
+        })
+        
+        window.location.reload(true);
     }
 
-    const handleEliminarAdmin = async () => {
-        const filaId = event.target.parentElement.parentElement.key;
-        const nombreFila = administradores.find(usuario => usuario.id === filaId).nombreUs;
-
-        const a = obtenerId(nombreFila)
-        console.log(nombreFila)
-
-/*         const settings = {
+    const handleEliminarDueno = async (id) =>{
+        const settings = {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
             }
         }
 
-        await fetch('http://localhost:8080/api/admins', settings)
+        await fetch(`http://localhost:8080/api/dueno/${id}`, settings)
         .then((response) => {
-            if (!response.ok){
-                console.log('ALGO PASO MAL JAJA', response.status)
+            if(!response.ok){
+                console.log('ALGO PASO', response.status)
             }
-            return response.json()
-        }).then((data) => {
-            setAdministradores(data)
-        }).catch((error) => {
+            console.log(response.text())
+        })
+        .catch((error) => {
             console.log("ERROR")
-        }) */
+        })
+        
+        window.location.reload(true);
     }
+
+    const handleEliminarInqui = async (id) =>{
+        const settings = {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+            }
+        }
+
+        await fetch(`http://localhost:8080/api/inquilino/${id}`, settings)
+        .then((response) => {
+            if(!response.ok){
+                console.log('ALGO PASO', response.status)
+            }
+            console.log(response.status)
+        })
+        .catch((error) => {
+            console.log("ERROR")
+        })
+        
+        window.location.reload(true);
+    }   
 
 
     return (
@@ -171,14 +185,14 @@ export const VerUsuarios = () => {
                     </thead>
                     <tbody>
                         {administradores.map(usuario => (
-                            <tr key={usuario.id}>
+                            <tr key={usuario.idAdmin}>
                                 <td>{usuario.nombre}</td>
                                 <td>{usuario.nombreUs}</td>
                                 <td>{usuario.email}</td>
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
                                 <td>{<button>Actualizar</button>}</td>
-                                <td>{<button onClick={handleEliminarAdmin}>Eliminar</button>}</td>
+                                <td>{<button onClick={() => handleEliminarAdmin(usuario.idAdmin)}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -204,14 +218,14 @@ export const VerUsuarios = () => {
                     </thead>
                     <tbody>
                         {duenos.map(usuario => (
-                            <tr key={usuario.id}>
+                            <tr key={usuario.idDueno}>
                                 <td>{usuario.nombre}</td>
                                 <td>{usuario.nombreUs}</td>
                                 <td>{usuario.email}</td>
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
                                 <td>{<button>Actualizar</button>}</td>
-                                <td>{<button>Eliminar</button>}</td>
+                                <td>{<button onClick={() => handleEliminarDueno(usuario.idDueno)}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -238,7 +252,7 @@ export const VerUsuarios = () => {
                     </thead>
                     <tbody>
                         {inquilino.map(usuario => (
-                            <tr key={usuario.id}>
+                            <tr key={usuario.idInquilino}>
                                 <td>{usuario.nombre}</td>
                                 <td>{usuario.nombreUs}</td>
                                 <td>{usuario.email}</td>
@@ -246,7 +260,7 @@ export const VerUsuarios = () => {
                                 <td>{usuario.telefono}</td>
                                 <td>{usuario.idUnidad}</td>
                                 <td>{<button>Actualizar</button>}</td>
-                                <td>{<button>Eliminar</button>}</td>
+                                <td>{<button onClick={() => handleEliminarInqui(usuario.idInquilino)}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>
