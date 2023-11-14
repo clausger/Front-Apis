@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link } from 'react-router-dom';
-import  axios  from 'axios'
+import { Link, useNavigate } from 'react-router-dom';
 
 export const VerUsuarios = () => {
 
     const [administradores, setAdministradores] = useState([]);
     const [duenos, setDuenos] = useState([]);
     const [inquilino, setInquilinos] = useState([]);
+    const nav = useNavigate();
 
     var token;
 
@@ -153,7 +153,12 @@ export const VerUsuarios = () => {
         })
         
         window.location.reload(true);
-    }   
+    }  
+    
+    const handleActualizarAdmin = (admin) => {
+        sessionStorage.setItem("update", JSON.stringify(admin))
+        nav('/usuario/update_admin')
+    }
 
 
     return (
@@ -191,7 +196,7 @@ export const VerUsuarios = () => {
                                 <td>{usuario.email}</td>
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
-                                <td>{<button>Actualizar</button>}</td>
+                                <td>{<button onClick={() => handleActualizarAdmin(usuario)}>Actualizar</button>}</td>
                                 <td>{<button onClick={() => handleEliminarAdmin(usuario.idAdmin)}>Eliminar</button>}</td>
                             </tr>
                         ))}
