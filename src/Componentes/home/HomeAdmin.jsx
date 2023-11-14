@@ -5,7 +5,7 @@ export const HomeAdmin= () => {
         <div>
             <h2>SOS ADMINISTRADOR</h2>
         
-            <Link to='/Usuarios'>
+            <Link to='/usuario'>
                 <button>Usuarios</button>
             </Link>
         </div>

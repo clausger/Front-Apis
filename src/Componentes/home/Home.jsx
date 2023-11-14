@@ -23,7 +23,7 @@ export const Home = () => {
 
     useEffect(()=>{
       if (rol != "admin" && rol !== "inquilino" && rol !== "dueno")
-        navigate("/Login", { state: location.state });
+        navigate("/login", { state: location.state });
     },[])
 
     const componentByAuth = () =>{

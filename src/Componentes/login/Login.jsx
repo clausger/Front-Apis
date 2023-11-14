@@ -58,7 +58,7 @@ export const Login = () => {
             }
         }).catch(err => console.error(`Error: ${err}`))
         
-        navigate("/Home", { state: location.state });
+        navigate("/home", { state: location.state });
     }
     
 

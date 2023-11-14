@@ -5,9 +5,6 @@ import  axios  from 'axios'
 
 export const VerUsuarios = () => {
 
-    // ACA VA UN TABLA PARA USUARIOS
-    // TODOS TIENE TELELFONO, DIRECCION, EMAIL, NOMBRE, NOMBRE_US
-
     const [administradores, setAdministradores] = useState([]);
     const [duenos, setDuenos] = useState([]);
     const [inquilino, setInquilinos] = useState([]);
@@ -94,7 +91,7 @@ export const VerUsuarios = () => {
     return (
         <div>
             <div>
-                <Link to="/Home">
+                <Link to="/home">
                     <button>Back</button>
                 </Link>
             </div>
@@ -102,7 +99,7 @@ export const VerUsuarios = () => {
                 <h2>Ver Usuarios</h2>
                 <h3>Administradores: </h3>
                 <div>
-                    <Link to="/Usuarios/Agregar">
+                    <Link to="/usuario/admin">
                         <button>AgregarUsuario</button>
                     </Link>
                 </div>
@@ -135,7 +132,7 @@ export const VerUsuarios = () => {
                 <hr></hr>
                 <h3>Duenos</h3>
                 <div>
-                    <Link to="/Usuarios/Agregar">
+                    <Link to="/usuario/dueno">
                         <button>AgregarUsuario</button>
                     </Link>
                 </div>
@@ -168,7 +165,7 @@ export const VerUsuarios = () => {
                 <hr></hr>
                 <h3>Inquilinos</h3>
                 <div>
-                    <Link to="/Usuarios/Agregar">
+                    <Link to="/usuario">
                         <button>AgregarUsuario</button>
                     </Link>
                 </div>
