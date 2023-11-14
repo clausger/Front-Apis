@@ -59,7 +59,6 @@ export const AgregarEdificio = () => {
             <input type="text" placeholder="Ingresa la ciudad" value={ciudad} onChange={(e) => setCiudad(e.target.value)}/>
             <input type="text" placeholder="Ingresa el codigo postal" value={postal} onChange={(e) => setPostal(e.target.value)}/>
             <input type="text" placeholder="Ingresa la direccion" value={direccion} onChange={(e) => setDireccion(e.target.value)}/>
-
             <input type="text" placeholder="Ingresa el pais"  value={pais} onChange={(e) => setPais(e.target.value)}/>
 
             <button type="submit">Agregar Edificio</button>

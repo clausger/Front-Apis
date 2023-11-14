@@ -11,6 +11,9 @@ export const HomeAdmin= () => {
             <Link to='/edificio'>
                 <button>Edificio</button>
             </Link>
+            <Link to='/unidad'>
+                <button>Unidad</button>
+            </Link>
         </div>
     )
 }

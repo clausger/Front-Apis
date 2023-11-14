@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export const AgregarUnidad = () => {
@@ -9,27 +10,47 @@ export const AgregarUnidad = () => {
     const [estado, setEstado] = useState('');
     const [idEdificio, setIdEdificio] = useState('');
 
-
-    const [unidad, setUnidad] = useState([]);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
+      e.preventDefault();
 
-        e.preventDefault();
-        const nuevaUnidad = { idDueno, piso, depto, estado, idEdificio };
-        setUnidad([...unidad, nuevaUnidad]);
+      const nuevaUnidad = { idDueno, piso, departamento:depto, estado, idEdificio };      
 
-        setIdDueno('');
-        setPiso('');
-        setDepto('');
-        setEstado('');
-        setIdEdificio('');
-        
+      setIdDueno('');
+      setPiso('');
+      setDepto('');
+      setEstado('');
+      setIdEdificio('');
       
+      const settings = {
+        method: "POST",
+        body: JSON.stringify(nuevaUnidad),
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+        }
+      }
 
+      await fetch(`http://localhost:8080/api/unidad`, settings)
+        .then((response) => {
+            if (!response.ok){
+                console.log('ALGO PASO MAL', response.status)
+            }
+            else{
+              navigate("/unidad")
+            }
+            return response.json()
+        }).catch((error) => {
+            console.log("ERROR")
+        })
       };
     
       return (
         <div>
+          <Link to="/unidad">
+                <button>Back</button>
+            </Link>
         <h3>Agregar Unidad</h3>
 
         <form onSubmit={handleSubmit}>

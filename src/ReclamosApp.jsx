@@ -11,6 +11,8 @@ import { ActualizarDueno } from "./Componentes/usuarios/actualizarUsuarios/actua
 import { ActualizarInquilino } from "./Componentes/usuarios/actualizarUsuarios/actualizarInquilino"
 import { AgregarEdificio } from "./Componentes/edificio/AgregarEdificio"
 import { ActualizarEdificio } from "./Componentes/edificio/ActualizarEdificio"
+import { VerUnidades } from "./Componentes/unidad/VerUnidades"
+import { AgregarUnidad } from "./Componentes/unidad/AgregarUnidad"
 
 export const ReclamosApp = () => { 
   return (
@@ -32,6 +34,8 @@ export const ReclamosApp = () => {
         <Route path="/edificio/add_edificio" element={<AgregarEdificio></AgregarEdificio>}></Route>
         <Route path="/edificio/update_edificio" element={<ActualizarEdificio></ActualizarEdificio>}></Route>
 
+        <Route path="/unidad" element={<VerUnidades></VerUnidades>}></Route>
+        <Route path="/unidad/add_unidad" element={<AgregarUnidad></AgregarUnidad>}></Route>
       </Routes>
     </div>
   )
