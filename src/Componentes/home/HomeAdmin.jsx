@@ -8,6 +8,9 @@ export const HomeAdmin= () => {
             <Link to='/usuario'>
                 <button>Usuarios</button>
             </Link>
+            <Link to='/edificio'>
+                <button>Edificio</button>
+            </Link>
         </div>
     )
 }

@@ -4,6 +4,8 @@ import { Route, Routes } from "react-router-dom"
 import { VerUsuarios } from "./Componentes/usuarios/VerUsuarios"
 import { AgregarAdmin } from "./Componentes/usuarios/agregarUsuarios/AgregarAdmin"
 import AgregarDueno from "./Componentes/usuarios/agregarUsuarios/AgregarDueno"
+import AgregarInquilino from "./Componentes/usuarios/agregarUsuarios/AgregarInquilino"
+import VerEdificio from "./Componentes/edificio/VerEdificio"
 
 export const ReclamosApp = () => { 
   return (
@@ -15,6 +17,8 @@ export const ReclamosApp = () => {
         <Route path="/usuario" element={<VerUsuarios></VerUsuarios>}></Route>
         <Route path="/usuario/admin" element={<AgregarAdmin></AgregarAdmin>}></Route>
         <Route path="/usuario/dueno" element={<AgregarDueno></AgregarDueno>}></Route>
+        <Route path="/usuario/inquilino" element={<AgregarInquilino></AgregarInquilino>}></Route>
+        <Route path="/edificio" element={<VerEdificio></VerEdificio>}></Route>
       </Routes>
     </div>
   )

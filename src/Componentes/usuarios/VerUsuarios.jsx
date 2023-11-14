@@ -86,6 +86,60 @@ export const VerUsuarios = () => {
         })
     }
 
+    const obtenerId = async (nombreUs) => {
+        var id = 0;
+        
+        const settings = {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        }
+
+        await fetch(`http://localhost:8080/api/nombreUs/admin`, settings)
+        .then((response) => {
+            if(!response.ok){
+                console.log('ALGO PASO', response.status)
+            }
+            const a = parseInt(response.text())
+            return a
+        }) .then((data) => {
+            console.log(data)
+            id = data
+        }).catch((error) => {
+            console.log("ERROR")
+        }) 
+        return id;
+    }
+
+    const handleEliminarAdmin = async () => {
+        const filaId = event.target.parentElement.parentElement.key;
+        const nombreFila = administradores.find(usuario => usuario.id === filaId).nombreUs;
+
+        const a = obtenerId(nombreFila)
+        console.log(nombreFila)
+
+/*         const settings = {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            }
+        }
+
+        await fetch('http://localhost:8080/api/admins', settings)
+        .then((response) => {
+            if (!response.ok){
+                console.log('ALGO PASO MAL JAJA', response.status)
+            }
+            return response.json()
+        }).then((data) => {
+            setAdministradores(data)
+        }).catch((error) => {
+            console.log("ERROR")
+        }) */
+    }
 
 
     return (
@@ -124,7 +178,7 @@ export const VerUsuarios = () => {
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
                                 <td>{<button>Actualizar</button>}</td>
-                                <td>{<button>Eliminar</button>}</td>
+                                <td>{<button onClick={handleEliminarAdmin}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -165,7 +219,7 @@ export const VerUsuarios = () => {
                 <hr></hr>
                 <h3>Inquilinos</h3>
                 <div>
-                    <Link to="/usuario">
+                    <Link to="/usuario/inquilino">
                         <button>AgregarUsuario</button>
                     </Link>
                 </div>

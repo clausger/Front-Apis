@@ -53,8 +53,6 @@ export const Login = () => {
             
             if (data != null && data != undefined) {
                 sessionStorage.setItem('jwt', data);
-            
-                // window.location.href = window.location.origin    // -> ESTO NOS LLEVA AL HOME 
             }
         }).catch(err => console.error(`Error: ${err}`))
         
