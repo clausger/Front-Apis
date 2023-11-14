@@ -10,7 +10,6 @@ export const Home = () => {
     const location = useLocation(); 
 
     const token = sessionStorage.getItem("jwt");
-    console.log(token)
     var rol
 
     if(token !== "Credenciales invalidas" && token !== undefined){
