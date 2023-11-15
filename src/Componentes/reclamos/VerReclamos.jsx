@@ -3,14 +3,7 @@ import { useEffect, useState } from "react";
 
 export const VerReclamos = () => {
     const [reclamos, setReclamos] = useState([])
-
-/*     const [fecha, setFecha] = useState();
-    const [descripcion, setDescripcion] = useState();
-    const [lugar, setLugar] = useState();
-    const [idEdificio, setIdEdificio] = useState();
-    const [idDueno, setIdDueno] = useState();
-    const [estado, setEstado] = useState();
-    const [mensaje, setMensaje] = useState(); */
+    const navigator = useNavigate();
 
     useEffect(() => {
         obtenerReclamos();
@@ -37,6 +30,76 @@ export const VerReclamos = () => {
         })
     }
 
+    const buscarFecha = (fecha) =>{
+        const date = new Date(fecha + (1 * 24 * 60 * 60 * 1000)) // LE AGREGO UN DIA PORQ SE GUARDA UN DIAS MENOS EN EL BACKEND
+        
+        return date.toLocaleDateString();
+    }
+
+    const handleActualizar = async (reclamos) =>{
+        //sessionStorage.setItem("update", JSON.stringify(reclamos))
+        const settings = {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+            }
+        }
+
+        if (reclamos.tipo === "General"){
+            sessionStorage.setItem("update", JSON.stringify(reclamos))
+            navigator('./update_rg')
+        }
+        else if(reclamos.tipo === "Unidad"){
+            await fetch(`http://localhost:8080/api/reclamoUnidad/${reclamos.idReclamo}`, settings)
+            .then((response) => {
+                if (!response.ok){
+                    console.log('ALGO PASO MAL', response.status)
+                }
+                return response.json()
+            }).then((data) => {
+                sessionStorage.setItem("update", JSON.stringify(data))
+            }).catch((error) => {
+                console.log("ERROR")
+            })
+
+            navigator('./update_ru')
+        }
+                
+    }
+
+    const handleEliminar = async (id, tipo) =>{
+        const settings = {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+            }
+        }
+
+        var url;
+
+        if(tipo === "General"){
+            url = `http://localhost:8080/api/reclamoGeneral/${id}`;
+        }
+        else if (tipo === "Unidad"){
+            url = `http://localhost:8080/api/reclamoUnidad/${id}`
+        }
+
+        await fetch(url, settings)
+        .then((response) => {
+            if(!response.ok){
+                console.log('ALGO PASO', response.status)
+            }
+            console.log(response.status)
+        })
+        .catch((error) => {
+            console.log("ERROR")
+        })
+    
+        window.location.reload(true);
+    }
+
     return ( 
     <div>
         <Link to="/home">
@@ -44,9 +107,9 @@ export const VerReclamos = () => {
         </Link>
         <div>
             <h3>Ver Reclamos</h3>
-            <Link to='/reclamos/add_reclamo'>
+            {/* <Link to='/reclamos/add_reclamo'>
                 <button>Agregar Reclamo</button>
-            </Link>
+            </Link> */}
         </div>
         <table className="tablaUsuario">
             <thead>
@@ -56,8 +119,9 @@ export const VerReclamos = () => {
                     <th>Fecha</th>
                     <th>Estado</th>
                     <th>Mensaje</th>
-                    <th>idEdificio</th>
-                    <th>idDueno</th>
+                    <th>Edificio</th>
+                    <th>Usuario</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -65,11 +129,13 @@ export const VerReclamos = () => {
                     <tr key={r.idReclamo}>
                         <td>{r.descripcion}</td>
                         <td>{r.lugar}</td>
-                        <td>{r.fecha}</td>
+                        <td>{buscarFecha(r.fecha)}</td>
                         <td>{r.estado}</td>
                         <td>{r.mensaje}</td>
                         <td>{r.idEdificio}</td>
-                        <td>{r.idDueno}</td>
+                        <td>{r.idUsuario}</td>
+                        <td>{<button onClick={() => handleActualizar(r)}>Actualizar</button>}</td>
+                        <td>{<button onClick={() => handleEliminar(r.idReclamo, r.tipo)}>Eliminar</button>}</td>
                     </tr>
                 ))}
             </tbody>
