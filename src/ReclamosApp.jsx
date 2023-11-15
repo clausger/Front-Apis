@@ -15,7 +15,7 @@ import { VerUnidades } from "./Componentes/unidad/VerUnidades"
 import { AgregarUnidad } from "./Componentes/unidad/AgregarUnidad"
 import { ActualizarUnidad} from "./Componentes/unidad/ActualizarUnidad"
 import { VerReclamos } from "./Componentes/reclamos/VerReclamos"
-import { AgregarReclamo } from "./Componentes/reclamos/agregarReclamo/AgregarReclamo"
+import { AgregarReclamo } from "./Componentes/reclamos/AgregarReclamo"
 
 export const ReclamosApp = () => { 
   return (
