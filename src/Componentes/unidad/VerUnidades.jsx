@@ -35,8 +35,8 @@ export const VerUnidades = () => {
     }
 
     const handleActualizarEdificio = (edificio) =>{
-        /* sessionStorage.setItem("update", JSON.stringify(edificio))
-        navigator('/edificio/update_edificio') */
+        sessionStorage.setItem("update", JSON.stringify(edificio))
+        navigate('/unidad/update_unidad')
     }
 
     const handleEliminarEdificio = async (id) =>{

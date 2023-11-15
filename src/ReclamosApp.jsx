@@ -13,6 +13,7 @@ import { AgregarEdificio } from "./Componentes/edificio/AgregarEdificio"
 import { ActualizarEdificio } from "./Componentes/edificio/ActualizarEdificio"
 import { VerUnidades } from "./Componentes/unidad/VerUnidades"
 import { AgregarUnidad } from "./Componentes/unidad/AgregarUnidad"
+import { ActualizarUnidad} from "./Componentes/unidad/ActualizarUnidad"
 
 export const ReclamosApp = () => { 
   return (
@@ -36,6 +37,7 @@ export const ReclamosApp = () => {
 
         <Route path="/unidad" element={<VerUnidades></VerUnidades>}></Route>
         <Route path="/unidad/add_unidad" element={<AgregarUnidad></AgregarUnidad>}></Route>
+        <Route path="/unidad/update_unidad" element={<ActualizarUnidad></ActualizarUnidad>}></Route>
       </Routes>
     </div>
   )
