@@ -18,6 +18,7 @@ import { VerReclamos } from "./Componentes/reclamos/VerReclamos"
 import { AgregarReclamo } from "./Componentes/reclamos/AgregarReclamo"
 import { ActualizarReclamosGeneral } from "./Componentes/reclamos/actualizarReclamo/actualizarReclamoGeneral"
 import { ActualizarReclamosUnidad } from "./Componentes/reclamos/actualizarReclamo/actualizarReclamoUnidad"
+import { VerReclamosEdificio } from "./Componentes/reclamos/verReclamoEdificio/VerReclamosEdificio"
 
 export const ReclamosApp = () => { 
   return (
@@ -47,6 +48,7 @@ export const ReclamosApp = () => {
         <Route path="/reclamos/add_reclamo" element={<AgregarReclamo></AgregarReclamo>}></Route>
         <Route path="/reclamos/update_rg" element={<ActualizarReclamosGeneral></ActualizarReclamosGeneral>}></Route>
         <Route path="/reclamos/update_ru" element={<ActualizarReclamosUnidad></ActualizarReclamosUnidad>}></Route>
+        <Route path="/reclamos/edificio" element={<VerReclamosEdificio></VerReclamosEdificio>}></Route>
       </Routes>
     </div>
   )

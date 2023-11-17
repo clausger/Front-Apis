@@ -4,9 +4,15 @@ export const HomeCliente = () => {
     return (
         <div>
             <h2>SOS CLIENTE Dueno/Inquilino</h2>
-            <button>Hacer Reclamo</button>
+            <Link to='/reclamos/add_reclamo'>
+                <button>Hacer Reclamo</button>
+            </Link>
+            
+            
             <button>Buscar Reclamo por id</button>
-            <button>Ver Reclamo de edificio</button>
+            <Link to='/reclamos/edificio'>
+                <button>Ver Reclamo de edificio</button>
+            </Link>
         </div>
     )
 }

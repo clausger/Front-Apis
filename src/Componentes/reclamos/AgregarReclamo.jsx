@@ -8,7 +8,7 @@ export const AgregarReclamo = () =>{
 
      return (
         <div>
-            <Link to='/reclamos'>
+            <Link to='/home'>
                 <button>Back</button>
             </Link>
             
