@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 export const ActualizarReclamosGeneral = () => {
@@ -57,6 +57,9 @@ export const ActualizarReclamosGeneral = () => {
     
     return (
         <div>
+        <Link to='/reclamos'>
+            <button>Back</button>
+        </Link>
         <h3>Actualizar Reclamo General</h3>
 
         <form onSubmit={handleSubmit}>

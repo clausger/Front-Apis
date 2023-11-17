@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 
 export const VerReclamos = () => {
     const [reclamos, setReclamos] = useState([])
+    const [option, setOption] = useState();
+
     const navigator = useNavigate();
 
     useEffect(() => {
@@ -25,6 +27,7 @@ export const VerReclamos = () => {
             return response.json()
         }).then((data) => {
             setReclamos(data)
+            //setReclamosOriginal(data)
         }).catch((error) => {
             console.log("ERROR")
         })
@@ -100,6 +103,23 @@ export const VerReclamos = () => {
         window.location.reload(true);
     }
 
+    /* nuevo, 
+    abierto, 
+    en proceso, 
+    desestimado, 
+    anulado y 
+    terminado. 
+    
+    setOption(e.target.value)
+    */
+
+    const handleChange = (e) =>{
+        setOption(e)
+
+        
+    
+    }
+
     return ( 
     <div>
         <Link to="/home">
@@ -107,9 +127,19 @@ export const VerReclamos = () => {
         </Link>
         <div>
             <h3>Ver Reclamos</h3>
-            {/* <Link to='/reclamos/add_reclamo'>
-                <button>Agregar Reclamo</button>
-            </Link> */}
+        </div>
+        <div>
+            <select onChange={(e) => handleChange(e.target.value)}>
+                <option value="null">Todos</option>
+                <option value="nuevo">Nuevo</option>
+                <option value="Abierto">Abierto</option>
+                <option value="en proceso">En Proceso</option>
+                <option value="desestimado">Desestimado</option>
+                <option value="anulado">Anulado</option>
+                <option value="terminado">Terminado</option>
+            </select>
+        
+            <h5>{option}</h5>
         </div>
         <table className="tablaUsuario">
             <thead>
@@ -134,8 +164,7 @@ export const VerReclamos = () => {
                         <td>{r.mensaje}</td>
                         <td>{r.idEdificio}</td>
                         <td>{r.idUsuario}</td>
-                        <td>{<button onClick={() => handleActualizar(r)}>Actualizar</button>}</td>
-                        <td>{<button onClick={() => handleEliminar(r.idReclamo, r.tipo)}>Eliminar</button>}</td>
+                        <td>{<button onClick={() => handleActualizar(r)}>Actualizar</button>} {<button onClick={() => handleEliminar(r.idReclamo, r.tipo)}>Eliminar</button>}</td>
                     </tr>
                 ))}
             </tbody>
