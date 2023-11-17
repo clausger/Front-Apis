@@ -72,7 +72,7 @@ export const ActualizarReclamosGeneral = () => {
             <input type="text" placeholder="Ingresa el mensaje"  value={mensaje} onChange={(e) => setMensaje(e.target.value)}/>
 
 
-            <button type="submit">Agregar Reclamo</button>
+            <button type="submit">Actualizar</button>
 
         </form>    
     </div>
