@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+import 
 
 export const HomeAdmin= () => {
     return (
-        <div>
+        <div className='home'>
             <h2>SOS ADMINISTRADOR</h2>
         
             <Link to='/usuario'>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Home } from '../home/Home'
 import { useLocation, useNavigate } from "react-router-dom";
+import "../../styles/loginStyle.css"
 
 export const Login = () => {
     const navigate = useNavigate();
@@ -60,9 +61,10 @@ export const Login = () => {
     
 
     return (
-    <div>
+    <div className='login'>
 
-        <h1 className="titulo-login">Login</h1>
+        <h1 className="titulo-login">Bienvenido</h1>
+        <h3>Inicio de sesion</h3>
         
         <form onSubmit={handleSubmit}>
 
@@ -90,9 +92,7 @@ export const Login = () => {
                     />
             </div>
 
-            <div className="botonSubmit">
-                <button type="submit" className="botonSubmit">Submit</button>            
-            </div>
+            <button type="submit">Sign In</button>
 
             
         </form>

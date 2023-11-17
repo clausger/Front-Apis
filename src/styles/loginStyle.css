@@ -1,0 +1,26 @@
+.login {
+    text-align: center;
+    align-items: center;
+    margin-top: 150pt;
+}
+.login h1{
+    margin: 0;
+}
+.login h3{
+    margin: 0;
+    margin-bottom: 15pt;
+}
+
+.login input{
+    margin-bottom: 7pt;
+}
+
+.login button {
+    margin-right: -50%;
+}   
+
+.login button:hover{
+    transition: 30ms;    
+    background-color: #007bff;
+    color: #fff;
+}
