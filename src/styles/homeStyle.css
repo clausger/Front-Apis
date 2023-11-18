@@ -1,0 +1,10 @@
+.home{
+    align-items: center;
+    text-align: center;
+    margin-top: 150pt;
+}
+.home button{
+    padding:10px;
+    border-radius: 7px;
+    margin:15px
+}

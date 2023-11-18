@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import "../../styles/tablaStyle.css"
 
 export const VerUsuarios = () => {
 
-    const [administradores, setAdministradores] = useState([]);
+    const [administradores, setAdministradores] = useState([{nombre:"Juan", nombreUs:"JCanestrari", email:"mail@gmail.com",direcion:"arenales 2057",telefono:1,idAdmin:0 }]);
     const [duenos, setDuenos] = useState([]);
     const [inquilino, setInquilinos] = useState([]);
     const nav = useNavigate();
@@ -178,7 +179,7 @@ export const VerUsuarios = () => {
                 </Link>
             </div>
             <div className="bodyUsuarios">
-                <h2>Ver Usuarios</h2>
+                <h2>Todos los usuarios</h2>
                 <h3>Administradores: </h3>
                 <div>
                     <Link to="/usuario/admin">
@@ -194,7 +195,6 @@ export const VerUsuarios = () => {
                             <th>Direcion</th>
                             <th>Telefono</th>
                             <th>Acciones</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -205,14 +205,14 @@ export const VerUsuarios = () => {
                                 <td>{usuario.email}</td>
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
-                                <td>{<button onClick={() => handleActualizarAdmin(usuario)}>Actualizar</button>}</td>
-                                <td>{<button onClick={() => handleEliminarAdmin(usuario.idAdmin)}>Eliminar</button>}</td>
+                                <td>{<button className='bottonActualizar' onClick={() => handleActualizarAdmin(usuario)}>Actualizar</button>}
+                                {<button className='bottonEliminar' onClick={() => handleEliminarAdmin(usuario.idAdmin)}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
                 <hr></hr>
-                <h3>Duenos</h3>
+                <h3>Duenos: </h3>
                 <div>
                     <Link to="/usuario/dueno">
                         <button>AgregarUsuario</button>
@@ -227,7 +227,6 @@ export const VerUsuarios = () => {
                             <th>Direcion</th>
                             <th>Telefono</th>
                             <th>Acciones</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -238,14 +237,14 @@ export const VerUsuarios = () => {
                                 <td>{usuario.email}</td>
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
-                                <td>{<button onClick={() => handleActualizarDueno(usuario)}>Actualizar</button>}</td>
-                                <td>{<button onClick={() => handleEliminarDueno(usuario.idDueno)}>Eliminar</button>}</td>
+                                <td>{<button className='bottonActualizar' onClick={() => handleActualizarDueno(usuario)}>Actualizar</button>}
+                                {<button className='bottonEliminar' onClick={() => handleEliminarDueno(usuario.idDueno)}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
                 <hr></hr>
-                <h3>Inquilinos</h3>
+                <h3>Inquilinos: </h3>
                 <div>
                     <Link to="/usuario/inquilino">
                         <button>AgregarUsuario</button>
@@ -259,9 +258,8 @@ export const VerUsuarios = () => {
                             <th>Email</th>
                             <th>Direcion</th>
                             <th>Telefono</th>
-                            <th>idUnidad</th>
+                            <th>Unidad</th>
                             <th>Acciones</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -273,14 +271,13 @@ export const VerUsuarios = () => {
                                 <td>{usuario.direcion}</td>
                                 <td>{usuario.telefono}</td>
                                 <td>{usuario.idUnidad}</td>
-                                <td>{<button onClick={() => handleActualizarInquilino(usuario)}>Actualizar</button>}</td>
-                                <td>{<button onClick={() => handleEliminarInqui(usuario.idInquilino)}>Eliminar</button>}</td>
+                                <td>{<button className='bottonActualizar' onClick={() => handleActualizarInquilino(usuario)}>Actualizar</button>}
+                                {<button className='bottonEliminar' onClick={() => handleEliminarInqui(usuario.idInquilino)}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
-        </div>
-        
+        </div>       
     )
 }
