@@ -6,12 +6,14 @@ export const ActualizarReclamosUnidad = () => {
 
     const reclamo = JSON.parse(sessionStorage.getItem("update"))
 
-    const [descripcion, setDescripcion] = useState(reclamo.descripcion);
-    const [idEdificio, setIdEdificio] = useState(reclamo.idEdificio);
-    const [idUsuario, setIdUsuario] = useState(reclamo.idUsuario);
-    const [unidad, setUnidad] = useState(reclamo.unidad);
+    const descripcion = reclamo.descripcion
+    const idEdificio = reclamo.idEdificio
+    const idUsuario = reclamo.idUsuario
+    const unidad = reclamo.unidad
+
     const [estado, setEstado] = useState(reclamo.estado);
     const [mensaje, setMensaje] = useState(reclamo.mensaje);
+
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -19,10 +21,6 @@ export const ActualizarReclamosUnidad = () => {
 
         const nuevoReclamo = { descripcion, idEdificio, idUsuario, unidad, estado, mensaje }
 
-        setDescripcion('');
-        setIdEdificio('');
-        setIdUsuario('');
-        setUnidad('');
         setEstado('');
         setMensaje('');
 
@@ -51,24 +49,36 @@ export const ActualizarReclamosUnidad = () => {
 
     };
 
+    const buscarFecha = (fecha) =>{
+        const date = new Date(fecha) // LE AGREGO UN DIA PORQ SE GUARDA UN DIAS MENOS EN EL BACKEND
+        
+        return date.toLocaleDateString();
+    }
+
     return ( <div>
         <Link to='/reclamos'>
             <button className="backButton">Back</button>
         </Link>
-        <h3>Actualizar Reclamo Unidad</h3>
+        <h3>Actualizar Estado Reclamo Unidad</h3>
 
-        <form onSubmit={handleSubmit}>
-
-            <input type="text" placeholder="Ingresa el descripcion" value={descripcion} onChange={(e) => setDescripcion(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el id del edificio" value={idEdificio} onChange={(e) => setIdEdificio(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el id del usuario" value={idUsuario} onChange={(e) => setIdUsuario(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el id de unidad"  value={unidad} onChange={(e) => setUnidad(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el mensaje"  value={mensaje} onChange={(e) => setMensaje(e.target.value)}/>
-
-
-            <button type="submit">Actulizar</button>
-
-        </form>
+        <div className="informacion">
+            <div>Descripcion: {reclamo.descripcion}</div>
+            <div>Unidad: {reclamo.unidad}</div>
+            <div>Fecha: {buscarFecha(reclamo.fecha)}</div>
+            <div>Edificio: {reclamo.idEdificio}</div>
+            <div>Usuario: {reclamo.idUsuario}</div>
+        
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <>Estado:  </>
+                    <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/>
+                </div>
+                <div>
+                    <>Mensaje: </>    
+                    <input type="text" placeholder="Ingresa el mensaje"  value={mensaje} onChange={(e) => setMensaje(e.target.value)}/>
+                </div>
+                <button type="submit">Actulizar</button>
+            </form>
+        </div>
     </div> );
 }
