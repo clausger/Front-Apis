@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom'; 
+import "../../../styles/generalStyle.css"
+
 
 export const ActualizarInquilino = () =>{
     const inquilino = JSON.parse(sessionStorage.getItem("update"));
@@ -58,7 +60,7 @@ export const ActualizarInquilino = () =>{
     <div>
         <div>
            <Link to="/usuario">
-                <button>Back</button>
+                <button className="backButton">Back</button>
             </Link>
         </div>
         <div>

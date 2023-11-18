@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate} from "react-router-dom";
+import "../../styles/generalStyle.css"
 
 
 export const AgregarEdificio = () => {
@@ -50,7 +51,7 @@ export const AgregarEdificio = () => {
       return (
         <div>
           <Link to="/edificio">
-            <button>Back</button>
+            <button className='backButton'>Back</button>
           </Link>
         <h3>Agregar Edificio</h3>
 

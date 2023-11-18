@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import "../../../styles/generalStyle.css"
 
 
 export const ActualizarReclamosGeneral = () => {
@@ -58,7 +59,7 @@ export const ActualizarReclamosGeneral = () => {
     return (
         <div>
         <Link to='/reclamos'>
-            <button>Back</button>
+            <button className="backButton">Back</button>
         </Link>
         <h3>Actualizar Reclamo General</h3>
 

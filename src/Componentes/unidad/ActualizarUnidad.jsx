@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "../../styles/generalStyle.css"
 
 export const ActualizarUnidad = () => {
     const unidad = JSON.parse(sessionStorage.getItem("update"))
@@ -51,7 +52,7 @@ export const ActualizarUnidad = () => {
     return ( 
     <div>
           <Link to="/unidad">
-                <button>Back</button>
+                <button className="backButton">Back</button>
             </Link>
         <h3>Agregar Unidad</h3>
 

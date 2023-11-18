@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../../styles/tablaStyle.css"
-
+import "../../styles/generalStyle.css"
 
 export const VerReclamos = () => {
     const [reclamos, setReclamos] = useState([])
@@ -125,7 +125,7 @@ export const VerReclamos = () => {
     return ( 
     <div>
         <Link to="/home">
-            <button>Back</button>
+            <button className="backButton">Back</button>
         </Link>
         <div>
             <h3>Ver Reclamos</h3>

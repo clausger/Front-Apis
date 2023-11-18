@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { AgregarReclamoGeneral } from "./AgregarReclamo/AgregarReclamoGeneral.jsx"
 import { AgregarReclamoUnidad } from "./AgregarReclamo/AgregarReclamoUnidad.jsx"
+import "../../styles/generalStyle.css"
+
 
 export const AgregarReclamo = () =>{
     const [option, setOption] = useState("A");
@@ -9,7 +11,7 @@ export const AgregarReclamo = () =>{
      return (
         <div>
             <Link to='/home'>
-                <button>Back</button>
+                <button className="backButton">Back</button>
             </Link>
             
             <select onChange={(e) => setOption(e.target.value)}>

@@ -79,7 +79,7 @@ const VerEdificio = () => {
         <div>
             <h2>Ver Edificios</h2>
             <Link to="/edificio/add_edificio">
-                    <button>Agregar Edificio</button>
+                    <button className="backButton">Agregar Edificio</button>
             </Link>
             <table className="tablaUsuarios">
                     <thead>

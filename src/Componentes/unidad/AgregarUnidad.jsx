@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-
+import "../../styles/generalStyle.css"
 
 export const AgregarUnidad = () => {
 
@@ -49,7 +49,7 @@ export const AgregarUnidad = () => {
       return (
         <div>
           <Link to="/unidad">
-                <button>Back</button>
+                <button className='backButton'>Back</button>
             </Link>
         <h3>Agregar Unidad</h3>
 

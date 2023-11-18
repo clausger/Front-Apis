@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import "../../styles/tablaStyle.css"
+import "../../styles/generalStyle.css"
+
 
 export const VerUsuarios = () => {
 
@@ -175,7 +177,7 @@ export const VerUsuarios = () => {
         <div>
             <div>
                 <Link to="/home">
-                    <button>Back</button>
+                    <button className="backButton">Back</button>
                 </Link>
             </div>
             <div className="bodyUsuarios">

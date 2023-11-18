@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate} from "react-router-dom";
+import "../../styles/generalStyle.css"
 
 export const ActualizarEdificio = () => {
     const edi = JSON.parse(sessionStorage.getItem("update"))
@@ -51,7 +52,7 @@ export const ActualizarEdificio = () => {
     return ( 
         <div>
           <Link to="/edificio">
-            <button>Back</button>
+            <button className='backButton'>Back</button>
           </Link>
         <h3>Actualizar Edificio</h3>
 

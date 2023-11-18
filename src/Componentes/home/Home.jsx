@@ -4,6 +4,8 @@ import { HomeAdmin } from "./HomeAdmin";
 import { HomeCliente } from "./HomeCliente";
 import { Login } from "../login/Login";
 import { useLocation, useNavigate } from "react-router-dom";
+import "../../styles/generalStyle.css"
+
 
 export const Home = () => {
     const navigate = useNavigate();
@@ -43,7 +45,7 @@ export const Home = () => {
   return (
     <div>
       <div>
-        <button onClick={handleLogOut}>Log out</button>
+        <button className="backButton" onClick={handleLogOut}>Log out</button>
         {componentByAuth()}
       </div>    
     </div>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom'; 
-
+import "../../../styles/generalStyle.css"
 
 
 const AgregarDueno = () => {
@@ -56,7 +56,7 @@ const AgregarDueno = () => {
         <div>
             <div>
                 <Link to="/usuario">
-                    <button>Back</button>
+                    <button className="backButton">Back</button>
                 </Link>
             </div>
             <div>

@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom'; 
 import { useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
+import "../../../styles/generalStyle.css"
 
 export const ActualizarAdmin = () => {
     const administrador = JSON.parse(sessionStorage.getItem("update"));
@@ -56,7 +57,7 @@ export const ActualizarAdmin = () => {
     <div>
         <div>
                 <Link to="/usuario">
-                    <button>Back</button>
+                    <button className='backButton'>Back</button>
                 </Link>
             </div>
             <div>

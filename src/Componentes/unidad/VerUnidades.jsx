@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate} from "react-router-dom";
 import "../../styles/tablaStyle.css"
-
+import "../../styles/generalStyle.css"
 
 export const VerUnidades = () => {
     const [unidades, setUnidades] = useState([]);
@@ -65,13 +65,13 @@ export const VerUnidades = () => {
     <div>
         <div>
             <Link to="/home">
-                <button>Back</button>
+                <button className='backButton'>Back</button>
             </Link>
         </div>
         <div>
             <h2>Ver Unidades</h2>
             <Link to="/unidad/add_unidad">
-                    <button>Agregar Unidad</button>
+                <button>Agregar Unidad</button>
             </Link>
             <table className="tablaUsuarios">
                     <thead>
