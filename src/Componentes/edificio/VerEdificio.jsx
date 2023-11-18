@@ -98,8 +98,8 @@ const VerEdificio = () => {
                                 <td>{edificio.ciudad}</td>
                                 <td>{edificio.codigoPostal}</td>
                                 <td>{edificio.pais}</td>
-                                <td>{<button onClick={() => handleActualizarEdificio(edificio)}>Actualizar</button>}
-                                {<button onClick={() => handleEliminarEdificio(edificio.idEdificio)}>Eliminar</button>}</td>
+                                <td>{<button className="bottonActualizar" onClick={() => handleActualizarEdificio(edificio)}>Actualizar</button>}
+                                {<button className="bottonEliminar" onClick={() => handleEliminarEdificio(edificio.idEdificio)}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>

@@ -92,8 +92,8 @@ export const VerUnidades = () => {
                                 <td>{unidad.departamento}</td>
                                 <td>{unidad.estado}</td>
                                 <td>{unidad.idDueno}</td>
-                                <td>{<button onClick={() => handleActualizarEdificio(unidad)}>Actualizar</button>}
-                                {<button onClick={() => handleEliminarEdificio(unidad.idUnidad)}>Eliminar</button>}</td>
+                                <td>{<button className="bottonActualizar" onClick={() => handleActualizarEdificio(unidad)}>Actualizar</button>}
+                                {<button className="bottonEliminar" onClick={() => handleEliminarEdificio(unidad.idUnidad)}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>

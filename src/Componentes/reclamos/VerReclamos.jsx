@@ -170,7 +170,8 @@ export const VerReclamos = () => {
                         <td>{r.mensaje}</td>
                         <td>{r.idEdificio}</td>
                         <td>{r.idUsuario}</td>
-                        <td>{<button onClick={() => handleActualizar(r)}>Actualizar</button>} {<button onClick={() => handleEliminar(r.idReclamo, r.tipo)}>Eliminar</button>}</td>
+                        <td>{<button className="bottonActualizar" onClick={() => handleActualizar(r)}>Actualizar</button>} 
+                        {<button className="bottonEliminar" onClick={() => handleEliminar(r.idReclamo, r.tipo)}>Eliminar</button>}</td>
                     </tr>
                 ))}
             </tbody>
