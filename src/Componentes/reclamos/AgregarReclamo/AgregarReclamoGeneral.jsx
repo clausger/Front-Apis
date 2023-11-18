@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 export const AgregarReclamoGeneral = () => {
 
@@ -9,15 +10,12 @@ export const AgregarReclamoGeneral = () => {
     const [estado, setEstado] = useState('');
     const [mensaje, setMensaje] = useState('');
 
-
-    const [reclamoGeneral, setReclamoGeneral] = useState([]);
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
-        const nuevoReclamo = { descripcion, idEdificio, idUsuario, lugar, estado, mensaje };
-        setReclamoGeneral([...reclamoGeneral, nuevoReclamo]);
-
+        const body = { descripcion, idEdificio, idUsuario, lugar, estado, mensaje };
+      
         setDescripcion('');
         setIdEdificio('');
         setIdUsuario('');
@@ -25,7 +23,28 @@ export const AgregarReclamoGeneral = () => {
         setEstado('');
         setMensaje('');
       
+        const settings = {
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+          }
+        }
 
+        await fetch(`http://localhost:8080/api/reclamoGeneral`, settings)
+        .then((response) => {
+            if (!response.ok){
+              console.log('ALGO PASO MAL', response.status)
+              window.alert(`El reclamoGeneral no tiene todos los parametros necesarios o estan erroneos`) 
+            }
+            return response.json()
+        }).then((data) => {
+            window.alert(`RECLAMO GUARDADO CON EXITO, PARA CONSULTARLO EL ID ES ${data}`) 
+            navigate("/home")
+        }).catch((error) => {
+            console.log("ERROR")
+        })
       };
     
       return (
