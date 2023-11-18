@@ -36,7 +36,11 @@ export const VerReclamos = () => {
     }
 
     const buscarFecha = (fecha) =>{
-        const date = new Date(fecha + (1 * 24 * 60 * 60 * 1000)) // LE AGREGO UN DIA PORQ SE GUARDA UN DIAS MENOS EN EL BACKEND
+        if(fecha === null || fecha === 0){
+            return null
+        }
+
+        const date = new Date(fecha) // LE AGREGO UN DIA PORQ SE GUARDA UN DIAS MENOS EN EL BACKEND
         
         return date.toLocaleDateString();
     }

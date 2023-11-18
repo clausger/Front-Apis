@@ -47,6 +47,8 @@ export const ActualizarReclamosUnidad = () => {
             console.log("ERROR")
         })
 
+        sessionStorage.removeItem("update")
+
     };
 
     return ( <div>

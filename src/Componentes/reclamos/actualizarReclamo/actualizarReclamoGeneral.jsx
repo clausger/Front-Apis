@@ -50,6 +50,8 @@ export const ActualizarReclamosGeneral = () => {
           }).catch((error) => {
               console.log("ERROR")
           })
+        
+          sessionStorage.removeItem("update")
         };
         
 
