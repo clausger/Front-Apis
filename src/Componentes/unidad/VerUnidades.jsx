@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate} from "react-router-dom";
+import "../../styles/tablaStyle.css"
+
 
 export const VerUnidades = () => {
     const [unidades, setUnidades] = useState([]);
@@ -65,12 +67,12 @@ export const VerUnidades = () => {
             <Link to="/home">
                 <button>Back</button>
             </Link>
-            <Link to="/unidad/add_unidad">
-                    <button>Agregar Unidad</button>
-            </Link>
         </div>
         <div>
             <h2>Ver Unidades</h2>
+            <Link to="/unidad/add_unidad">
+                    <button>Agregar Unidad</button>
+            </Link>
             <table className="tablaUsuarios">
                     <thead>
                         <tr>
@@ -80,7 +82,6 @@ export const VerUnidades = () => {
                             <th>Estado</th>
                             <th>idDueno</th>
                             <th>Acciones</th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,8 +92,8 @@ export const VerUnidades = () => {
                                 <td>{unidad.departamento}</td>
                                 <td>{unidad.estado}</td>
                                 <td>{unidad.idDueno}</td>
-                                <td>{<button onClick={() => handleActualizarEdificio(unidad)}>Actualizar</button>}</td>
-                                <td>{<button onClick={() => handleEliminarEdificio(unidad.idUnidad)}>Eliminar</button>}</td>
+                                <td>{<button onClick={() => handleActualizarEdificio(unidad)}>Actualizar</button>}
+                                {<button onClick={() => handleEliminarEdificio(unidad.idUnidad)}>Eliminar</button>}</td>
                             </tr>
                         ))}
                     </tbody>
