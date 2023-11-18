@@ -52,7 +52,6 @@ export const VerReclamosEdificio = () => {
           }   
           return response.json()
         }).then((data) => {
-          console.log(data)
           setReclamos(data)
         }).catch((error) => {
             console.log("ERROR")

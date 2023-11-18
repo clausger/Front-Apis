@@ -7,9 +7,9 @@ export const HomeCliente = () => {
             <Link to='/reclamos/add_reclamo'>
                 <button>Hacer Reclamo</button>
             </Link>
-            
-            
-            <button>Buscar Reclamo por id</button>
+            <Link to='/reclamos/id'>
+                <button>Buscar Reclamo por id</button>
+            </Link>
             <Link to='/reclamos/edificio'>
                 <button>Ver Reclamo de edificio</button>
             </Link>
