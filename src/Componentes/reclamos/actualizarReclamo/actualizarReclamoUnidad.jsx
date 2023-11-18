@@ -50,6 +50,10 @@ export const ActualizarReclamosUnidad = () => {
     };
 
     const buscarFecha = (fecha) =>{
+        if(fecha === null || fecha === 0){
+            return null
+        }
+
         const date = new Date(fecha) // LE AGREGO UN DIA PORQ SE GUARDA UN DIAS MENOS EN EL BACKEND
         
         return date.toLocaleDateString();
@@ -71,7 +75,14 @@ export const ActualizarReclamosUnidad = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <>Estado:  </>
-                    <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/>
+                    <select onChange={(e) => setEstado(e.target.value)}>
+                        <option value="Nuevo">Nuevo</option>
+                        <option value="Abierto">Abierto</option>
+                        <option value="En Proceso">En Proceso</option>
+                        <option value="Desestimado">Desestimado</option>
+                        <option value="Anulado">Anulado</option>
+                        <option value="Terminado">Terminado</option>
+                    </select>                
                 </div>
                 <div>
                     <>Mensaje: </>    

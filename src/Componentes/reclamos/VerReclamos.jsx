@@ -121,9 +121,6 @@ export const VerReclamos = () => {
 
     const handleChange = (e) =>{
         setOption(e)
-
-        
-    
     }
 
     return ( 

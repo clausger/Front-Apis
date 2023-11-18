@@ -7,8 +7,8 @@ export const AgregarReclamoUnidad = () => {
     const [idEdificio, setIdEdificio] = useState('');
     const [idUsuario, setIdUsuario] = useState('');
     const [idUnidad, setUnidad] = useState('');
-    const [estado, setEstado] = useState('');
-    const [mensaje, setMensaje] = useState('');
+    const estado = 'Nuevo'
+    const mensaje = ''
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -18,8 +18,6 @@ export const AgregarReclamoUnidad = () => {
       setIdEdificio('');
       setIdUsuario('');
       setUnidad('');
-      setEstado('');
-      setMensaje('');
       
       const settings = {
         method: "POST",
@@ -54,8 +52,6 @@ export const AgregarReclamoUnidad = () => {
           <input type="text" placeholder="Ingresa el id del edificio" value={idEdificio} onChange={(e) => setIdEdificio(e.target.value)}/>
           <input type="text" placeholder="Ingresa el id del usuario" value={idUsuario} onChange={(e) => setIdUsuario(e.target.value)}/>
           <input type="text" placeholder="Ingresa el id de unidad"  value={idUnidad} onChange={(e) => setUnidad(e.target.value)}/>
-          <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/>
-          <input type="text" placeholder="Ingresa el mensaje"  value={mensaje} onChange={(e) => setMensaje(e.target.value)}/>
 
           <button type="submit">Agregar Reclamo</button>
         </form>

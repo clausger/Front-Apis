@@ -35,30 +35,31 @@ export const ActualizarReclamosGeneral = () => {
         }
 
         await fetch(`http://localhost:8080/api/reclamoGeneral/${reclamo.idReclamo}`, settings)
-            .then((response) => {
-            if (!response.ok){
-                console.log('ALGO PASO MAL', response.status)
-            }   
-            else{
-                navigate('/reclamos')
-            }   
-                return response.json()
-            }).catch((error) => {
-                console.log("ERROR")
-            })
+        .then((response) => {
+        if (!response.ok){
+            console.log('ALGO PASO MAL', response.status)
+        }   
+        else{
+            navigate('/reclamos')
+        }   
+            return response.json()
+        }).catch((error) => {
+            console.log("ERROR")
+        })
 
-            sessionStorage.removeItem("update")
+        sessionStorage.removeItem("update")
     };
 
     const buscarFecha = (fecha) =>{
+        if(fecha === null || fecha === 0){
+            return null
+        }
+
         const date = new Date(fecha) // LE AGREGO UN DIA PORQ SE GUARDA UN DIAS MENOS EN EL BACKEND
         
         return date.toLocaleDateString();
     }
 
-
-      
-    
     return (
         <div>
         <Link to='/reclamos'>
@@ -76,7 +77,15 @@ export const ActualizarReclamosGeneral = () => {
             <form onSubmit={handleSubmit}>
                 <div>
                     <>Estado:  </>
-                    <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/>
+                    {/* <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/> */}
+                    <select onChange={(e) => setEstado(e.target.value)}>
+                        <option value="Nuevo">Nuevo</option>
+                        <option value="Abierto">Abierto</option>
+                        <option value="En Proceso">En Proceso</option>
+                        <option value="Desestimado">Desestimado</option>
+                        <option value="Anulado">Anulado</option>
+                        <option value="Terminado">Terminado</option>
+                    </select>
                 </div>
                 <div>
                     <>Mensaje: </>    
