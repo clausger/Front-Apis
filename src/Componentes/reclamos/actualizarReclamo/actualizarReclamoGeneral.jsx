@@ -7,10 +7,11 @@ export const ActualizarReclamosGeneral = () => {
 
     const reclamo = JSON.parse(sessionStorage.getItem("update"))
 
-    const [descripcion, setDescripcion] = useState(reclamo.descripcion);
-    const [idEdificio, setIdEdificio] = useState(reclamo.idEdificio);
-    const [idUsuario, setIdUsuario] = useState(reclamo.idUsuario);
-    const [lugar, setLugar] = useState(reclamo.lugar);
+    const descripcion = reclamo.descripcion
+    const idEdificio = reclamo.idEdificio
+    const idUsuario = reclamo.idUsuario
+    const lugar = reclamo.lugar
+
     const [estado, setEstado] = useState(reclamo.estado);
     const [mensaje, setMensaje] = useState(reclamo.mensaje);
 
@@ -18,17 +19,12 @@ export const ActualizarReclamosGeneral = () => {
 
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
         const nuevoReclamo = { descripcion, idEdificio, idUsuario, lugar, estado, mensaje };
 
-        setDescripcion('');
-        setIdEdificio('');
-        setIdUsuario('');
-        setLugar('');
         setEstado('');
         setMensaje('');
-        
+
         const settings = {
             method: "PUT",
             body: JSON.stringify(nuevoReclamo),
@@ -39,21 +35,26 @@ export const ActualizarReclamosGeneral = () => {
         }
 
         await fetch(`http://localhost:8080/api/reclamoGeneral/${reclamo.idReclamo}`, settings)
-          .then((response) => {
+            .then((response) => {
             if (!response.ok){
                 console.log('ALGO PASO MAL', response.status)
             }   
             else{
                 navigate('/reclamos')
             }   
-              return response.json()
-          }).catch((error) => {
-              console.log("ERROR")
-          })
+                return response.json()
+            }).catch((error) => {
+                console.log("ERROR")
+            })
+
+            sessionStorage.removeItem("update")
+    };
+
+    const buscarFecha = (fecha) =>{
+        const date = new Date(fecha) // LE AGREGO UN DIA PORQ SE GUARDA UN DIAS MENOS EN EL BACKEND
         
-          sessionStorage.removeItem("update")
-        };
-        
+        return date.toLocaleDateString();
+    }
 
 
       
@@ -63,21 +64,27 @@ export const ActualizarReclamosGeneral = () => {
         <Link to='/reclamos'>
             <button className="backButton">Back</button>
         </Link>
-        <h3>Actualizar Reclamo General</h3>
+        <h3>Actualizar Estado del Reclamo General</h3>
 
-        <form onSubmit={handleSubmit}>
-
-            <input type="text" placeholder="Ingresa el descripcion" value={descripcion} onChange={(e) => setDescripcion(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el id del edificio" value={idEdificio} onChange={(e) => setIdEdificio(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el id del usuario" value={idUsuario} onChange={(e) => setIdUsuario(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el lugar"  value={lugar} onChange={(e) => setLugar(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el mensaje"  value={mensaje} onChange={(e) => setMensaje(e.target.value)}/>
-
-
-            <button type="submit">Actualizar</button>
-
-        </form>    
+        <div className="informacion">
+            <div>Descripcion: {reclamo.descripcion}</div>
+            <div>Lugar: {reclamo.lugar}</div>
+            <div>Fecha: {buscarFecha(reclamo.fecha)}</div>
+            <div>Edificio: {reclamo.idEdificio}</div>
+            <div>Usuario: {reclamo.idUsuario}</div>
+        
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <>Estado:  </>
+                    <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/>
+                </div>
+                <div>
+                    <>Mensaje: </>    
+                    <input type="text" placeholder="Ingresa el mensaje"  value={mensaje} onChange={(e) => setMensaje(e.target.value)}/>
+                </div>
+                <button type="submit">Actulizar</button>
+            </form>
+        </div>    
     </div>
       );
 }
