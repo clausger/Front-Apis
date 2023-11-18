@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {Link} from "react-router-dom"
+import "../../../styles/generalStyle.css"
 
 export const VerReclamosEdificio = () => {
     
@@ -37,6 +38,12 @@ export const VerReclamosEdificio = () => {
     },[])
 
     const handleBuscar = async ()=>{
+
+        if (!Number.isInteger(parseInt(value))){
+            window.alert("Ingresa un numero")
+            return null;
+        }
+
         const settings = {
             method: "GET",
             headers: {
@@ -47,32 +54,38 @@ export const VerReclamosEdificio = () => {
 
         await fetch(`http://localhost:8080/api/reclamo/?idEdificio=${value}`, settings)
         .then((response) => {
-          if (!response.ok){
-              console.log('ALGO PASO MAL', response.status)
-          }   
+            if (!response.ok){
+                console.log('ALGO PASO MAL', response.status)
+            }  
           return response.json()
         }).then((data) => {
-          setReclamos(data)
+            if (data.length === 0){
+                window.alert(`El edificio con id ${value} no fue encontrado`)
+            }
+            setReclamos(data)
         }).catch((error) => {
             console.log("ERROR")
         })
+    }
+
+    const buscarFecha = (fecha) =>{
+        const date = new Date(fecha + (1 * 24 * 60 * 60 * 1000)) // LE AGREGO UN DIA PORQ SE GUARDA UN DIAS MENOS EN EL BACKEND
+        
+        return date.toLocaleDateString();
     }
 
     return ( 
         <div>
             <div>
                 <Link to='/home'>
-                    <button>Back</button>
+                    <button className="backButton">Back</button>
                 </Link>
             </div>
 
-        <input
-        type="text"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        />
-
-        <button onClick={handleBuscar}>Buscar</button>
+            <div className="buscador">
+                <input type="text" value={value} onChange={(e) => setValue(e.target.value)}/>
+                <button onClick={handleBuscar}>Buscar</button>
+            </div>
 
         <table className="tablaUsuario">
             <thead>
@@ -91,7 +104,7 @@ export const VerReclamosEdificio = () => {
                     <tr key={r.idReclamo}>
                         <td>{r.descripcion}</td>
                         <td>{r.lugar}</td>
-                        <td>{r.fecha}</td>
+                        <td>{buscarFecha(r.fecha)}</td>
                         <td>{r.estado}</td>
                         <td>{r.mensaje}</td>
                         <td>{r.idEdificio}</td>

@@ -4,7 +4,7 @@ import "../../styles/homeStyle.css"
 export const HomeCliente = () => {
     return (
         <div className="home">
-            <h2>SOS CLIENTE Dueno/Inquilino</h2>
+            <h2>MODO CLIENTE (Dueno/Inquilino)</h2>
             <Link to='/reclamos/add_reclamo'>
                 <button>Hacer Reclamo</button>
             </Link>
