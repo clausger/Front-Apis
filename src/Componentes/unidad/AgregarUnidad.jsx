@@ -1,23 +1,45 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import "../../styles/generalStyle.css"
 
 export const AgregarUnidad = () => {
 
-    const [idDueno, setIdDueno] = useState('');
     const [piso, setPiso] = useState('');
     const [depto, setDepto] = useState('');
     const [estado, setEstado] = useState('');
     const [idEdificio, setIdEdificio] = useState('');
+    const [duenos, setDuenos] = useState([]);
+    const [dueno, setDueno] = useState('')
 
     const navigate = useNavigate();
+
+    useEffect(()=>{
+      const settings = {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${sessionStorage.getItem("jwt")}`,
+        }
+      }
+      fetch(`http://localhost:8080/api/duenos`, settings)
+      .then((response) => {
+          if (!response.ok){
+              console.log('ALGO PASO MAL', response.status)
+          }
+          return response.json()
+      }).then((data) => {
+          setDuenos(data)
+      }).catch((error) => {
+          console.log("ERROR")
+      })
+
+    },[])
 
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      const nuevaUnidad = { idDueno, piso, departamento:depto, estado, idEdificio };      
+      const nuevaUnidad = { idDueno:dueno, piso, departamento:depto, estado, idEdificio };      
 
-      setIdDueno('');
       setPiso('');
       setDepto('');
       setEstado('');
@@ -55,19 +77,18 @@ export const AgregarUnidad = () => {
 
         <form onSubmit={handleSubmit}>
 
-            <input type="text" placeholder="Ingresa el id del Dueño" value={idDueno} onChange={(e) => setIdDueno(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el piso" value={piso} onChange={(e) => setPiso(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el departamento" value={depto} onChange={(e) => setDepto(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/>
-            <input type="text" placeholder="Ingresa el id del edificio"  value={idEdificio} onChange={(e) => setIdEdificio(e.target.value)}/>
+          <select onChange={(e) => setDueno(e.target.value)}>
+            <option value="null">Selecione Dueno</option>
+            {duenos.map(dueno => (<option value={dueno.idDueno}>{dueno.nombre}</option>))}
+          </select>
+          <input type="text" placeholder="Ingresa el piso" value={piso} onChange={(e) => setPiso(e.target.value)}/>
+          <input type="text" placeholder="Ingresa el departamento" value={depto} onChange={(e) => setDepto(e.target.value)}/>
+          <input type="text" placeholder="Ingresa el estado"  value={estado} onChange={(e) => setEstado(e.target.value)}/>
+          <input type="text" placeholder="Ingresa el id del edificio"  value={idEdificio} onChange={(e) => setIdEdificio(e.target.value)}/>
 
-            <button type="submit">Agregar Unidad</button>
+          <button type="submit">Agregar Unidad</button>
 
-        </form>
-
-      
-
-        
+        </form>  
     </div>
       )
     }
